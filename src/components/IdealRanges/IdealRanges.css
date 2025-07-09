@@ -1,0 +1,213 @@
+.ideal-ranges-panel {
+  background-color: var(--background-paper);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: linear-gradient(145deg, #ffffff, #f9f6ff);
+}
+
+.ideal-ranges-panel:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.ideal-ranges-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(to right, #673ab7, #9575cd);
+}
+
+.ideal-ranges-panel h3 {
+  color: var(--text-primary);
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 0.8rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.ideal-ranges-panel h3::before {
+  content: '📐';
+  font-size: 1.4rem;
+}
+
+.ideal-ranges-panel h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(to right, #673ab7, #9575cd);
+  border-radius: 1.5px;
+}
+
+.ideal-ranges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+
+.ideal-range-item {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.ideal-range-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background-color: #673ab7;
+  opacity: 0.5;
+  transition: all var(--transition-normal);
+}
+
+.ideal-range-item:hover {
+  transform: translateY(-8px) rotate(1deg);
+  box-shadow: var(--shadow-md);
+}
+
+.ideal-range-item:hover::before {
+  width: 100%;
+  opacity: 0.05;
+}
+
+.range-param {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-primary);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.06);
+}
+
+.range-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #673ab7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(103, 58, 183, 0.08);
+  padding: 0.6rem;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.range-value::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  transition: all var(--transition-normal);
+}
+
+.ideal-range-item:hover .range-value {
+  transform: scale(1.05);
+  background-color: rgba(103, 58, 183, 0.12);
+}
+
+.ideal-range-item:hover .range-value::before {
+  transform: scale(7);
+  opacity: 0;
+}
+
+/* Create different styling for each parameter type */
+.ideal-range-item:nth-child(1) .range-value { color: #4caf50; background-color: rgba(76, 175, 80, 0.08); }
+.ideal-range-item:nth-child(2) .range-value { color: #2196f3; background-color: rgba(33, 150, 243, 0.08); }
+.ideal-range-item:nth-child(3) .range-value { color: #ff9800; background-color: rgba(255, 152, 0, 0.08); }
+.ideal-range-item:nth-child(4) .range-value { color: #9c27b0; background-color: rgba(156, 39, 176, 0.08); }
+.ideal-range-item:nth-child(5) .range-value { color: #e53935; background-color: rgba(229, 57, 53, 0.08); }
+.ideal-range-item:nth-child(6) .range-value { color: #00bcd4; background-color: rgba(0, 188, 212, 0.08); }
+.ideal-range-item:nth-child(7) .range-value { color: #ff5722; background-color: rgba(255, 87, 34, 0.08); }
+
+.ideal-range-item:nth-child(1)::before { background-color: #4caf50; }
+.ideal-range-item:nth-child(2)::before { background-color: #2196f3; }
+.ideal-range-item:nth-child(3)::before { background-color: #ff9800; }
+.ideal-range-item:nth-child(4)::before { background-color: #9c27b0; }
+.ideal-range-item:nth-child(5)::before { background-color: #e53935; }
+.ideal-range-item:nth-child(6)::before { background-color: #00bcd4; }
+.ideal-range-item:nth-child(7)::before { background-color: #ff5722; }
+
+.ideal-range-item:hover:nth-child(1) .range-value { background-color: rgba(76, 175, 80, 0.12); }
+.ideal-range-item:hover:nth-child(2) .range-value { background-color: rgba(33, 150, 243, 0.12); }
+.ideal-range-item:hover:nth-child(3) .range-value { background-color: rgba(255, 152, 0, 0.12); }
+.ideal-range-item:hover:nth-child(4) .range-value { background-color: rgba(156, 39, 176, 0.12); }
+.ideal-range-item:hover:nth-child(5) .range-value { background-color: rgba(229, 57, 53, 0.12); }
+.ideal-range-item:hover:nth-child(6) .range-value { background-color: rgba(0, 188, 212, 0.12); }
+.ideal-range-item:hover:nth-child(7) .range-value { background-color: rgba(255, 87, 34, 0.12); }
+
+/* Add animation for each item */
+@keyframes scaleIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.ideal-range-item:nth-child(1) { animation: scaleIn 0.3s ease-out forwards; }
+.ideal-range-item:nth-child(2) { animation: scaleIn 0.35s ease-out forwards; }
+.ideal-range-item:nth-child(3) { animation: scaleIn 0.4s ease-out forwards; }
+.ideal-range-item:nth-child(4) { animation: scaleIn 0.45s ease-out forwards; }
+.ideal-range-item:nth-child(5) { animation: scaleIn 0.5s ease-out forwards; }
+.ideal-range-item:nth-child(6) { animation: scaleIn 0.55s ease-out forwards; }
+.ideal-range-item:nth-child(7) { animation: scaleIn 0.6s ease-out forwards; }
+
+@media (max-width: 992px) {
+  .ideal-ranges-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .ideal-ranges-panel {
+    padding: 1.5rem;
+  }
+  
+  .ideal-ranges-panel h3 {
+    font-size: 1.2rem;
+  }
+  
+  .ideal-range-item {
+    padding: 1.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .ideal-ranges-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .range-value {
+    font-size: 1.1rem;
+  }
+}

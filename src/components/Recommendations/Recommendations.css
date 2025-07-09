@@ -1,0 +1,439 @@
+.recommendations-panel {
+  background-color: var(--background-paper);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: linear-gradient(145deg, #ffffff, #fdfbf5);
+}
+
+.recommendations-panel:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.recommendations-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(to right, var(--accent-color), var(--accent-light));
+}
+
+.recommendations-panel h3 {
+  color: var(--text-primary);
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.recommendations-icon {
+  font-size: 1.5rem;
+}
+
+.ml-badge {
+  background: linear-gradient(135deg, #6200ea, #3f51b5);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 2px 8px rgba(98, 0, 234, 0.3);
+  animation: pulse 2s infinite;
+}
+
+.ml-badge::before {
+  content: '🧠';
+  font-size: 1rem;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(98, 0, 234, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(98, 0, 234, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(98, 0, 234, 0); }
+}
+
+.recommendations-panel h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(to right, var(--accent-color), var(--accent-light));
+  border-radius: 1.5px;
+}
+
+.recommendations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.recommendation-item {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  border-left: 4px solid;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.recommendation-overlay {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+
+.recommendation-item:hover {
+  transform: translateX(8px) translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.recommendation-item:nth-child(3n+1) {
+  border-left-color: var(--primary-color);
+}
+
+.recommendation-item:nth-child(3n+2) {
+  border-left-color: var(--secondary-color);
+}
+
+.recommendation-item:nth-child(3n+3) {
+  border-left-color: var(--accent-color);
+}
+
+.rec-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.rec-parameter {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  position: relative;
+}
+
+.rec-param-dot {
+  content: '';
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-color: currentColor;
+  opacity: 0.1;
+  border-radius: 50%;
+}
+
+.recommendation-item:nth-child(3n+1) .rec-parameter {
+  color: var(--primary-dark);
+}
+
+.recommendation-item:nth-child(3n+2) .rec-parameter {
+  color: var(--secondary-dark);
+}
+
+.recommendation-item:nth-child(3n+3) .rec-parameter {
+  color: var(--accent-dark);
+}
+
+.rec-values {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.current-value, .target-value, .confidence-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.current-value:hover, .target-value:hover, .confidence-value:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.value-icon {
+  font-size: 1rem;
+}
+
+.current-value {
+  background-color: var(--secondary-ghost);
+  color: var(--secondary-dark);
+  border: 1px solid rgba(229, 57, 53, 0.2);
+}
+
+.target-value {
+  background-color: var(--primary-ghost);
+  color: var(--primary-dark);
+  border: 1px solid rgba(46, 125, 50, 0.2);
+}
+
+.confidence-value {
+  background-color: rgba(98, 0, 234, 0.1);
+  color: #6200ea;
+  border: 1px solid rgba(98, 0, 234, 0.2);
+}
+
+.rec-action {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  position: relative;
+  padding-left: 1.8rem;
+  background-color: rgba(0, 0, 0, 0.02);
+  padding: 1rem 1rem 1rem 2.5rem;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.rec-action:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.action-arrow {
+  position: absolute;
+  left: 1rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.recommendation-item:nth-child(3n+1) .action-arrow {
+  color: var(--primary-color);
+}
+
+.recommendation-item:nth-child(3n+2) .action-arrow {
+  color: var(--secondary-color);
+}
+
+.recommendation-item:nth-child(3n+3) .action-arrow {
+  color: var(--accent-color);
+}
+
+.rec-expand-indicator {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  opacity: 0.6;
+  transition: all var(--transition-fast);
+}
+
+.recommendation-item:hover .rec-expand-indicator {
+  opacity: 1;
+}
+
+.rec-details {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.rec-details h4 {
+  color: var(--text-primary);
+  font-size: 1.05rem;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.rec-details p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.ml-insight {
+  margin-top: 1.2rem;
+  padding: 1.2rem;
+  background-color: rgba(98, 0, 234, 0.05);
+  border-radius: var(--radius-md);
+  border-left: 3px solid #6200ea;
+}
+
+.ml-insight h4 {
+  color: #6200ea;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ml-insight h4::before {
+  content: '🧠';
+  font-size: 1.1rem;
+}
+
+.no-recommendations {
+  background-color: rgba(76, 175, 80, 0.1);
+  border-radius: var(--radius-md);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  color: var(--primary-dark);
+  font-weight: 500;
+  font-size: 1.05rem;
+  border: 1px dashed rgba(76, 175, 80, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.optimal-icon {
+  font-size: 2.5rem;
+  display: block;
+  background-color: rgba(76, 175, 80, 0.2);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+/* Add animation for recommendations */
+@keyframes slideInRight {
+  from { transform: translateX(50px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.recommendation-item:nth-child(1) { animation: slideInRight 0.3s ease-out forwards; }
+.recommendation-item:nth-child(2) { animation: slideInRight 0.4s ease-out forwards; }
+.recommendation-item:nth-child(3) { animation: slideInRight 0.5s ease-out forwards; }
+.recommendation-item:nth-child(4) { animation: slideInRight 0.6s ease-out forwards; }
+.recommendation-item:nth-child(5) { animation: slideInRight 0.7s ease-out forwards; }
+
+/* ML Status Indicator in App Header */
+.ml-status {
+  font-size: 0.85rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-full);
+  margin-top: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.ml-status::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.ml-status.loading {
+  background-color: rgba(255, 152, 0, 0.1);
+  color: #f57c00;
+}
+
+.ml-status.loading::before {
+  background-color: #f57c00;
+  animation: blink 1s infinite;
+}
+
+.ml-status.ready {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #388e3c;
+}
+
+.ml-status.ready::before {
+  background-color: #388e3c;
+}
+
+.ml-status.error {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #d32f2f;
+}
+
+.ml-status.error::before {
+  background-color: #d32f2f;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@media (max-width: 768px) {
+  .recommendations-panel {
+    padding: 1.5rem;
+  }
+  
+  .recommendations-panel h3 {
+    font-size: 1.2rem;
+  }
+  
+  .rec-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+  
+  .rec-action {
+    font-size: 0.95rem;
+    padding: 0.8rem 0.8rem 0.8rem 2.2rem;
+  }
+  
+  .recommendation-item {
+    padding: 1.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .recommendations-panel {
+    padding: 1.2rem;
+  }
+  
+  .rec-values {
+    width: 100%;
+  }
+  
+  .current-value, .target-value, .confidence-value {
+    flex: 1;
+    justify-content: center;
+  }
+}
