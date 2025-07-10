@@ -441,7 +441,7 @@ function App() {
       <header>
         <h1>{selectedCrop} Crop Yield Prediction & Management</h1>
         {mlModelStatus === "loading" && <div className="ml-status loading">ML Model: Loading...</div>}
-        {mlModelStatus === "ready" && <div className="ml-status ready">ML Model: Active</div>}
+        {mlModelStatus === "ready" && <div className="ml-status ready1">ML Model: Active</div>}
         {mlModelStatus === "error" && <div className="ml-status error">ML Model: Error (Using Rule-Based Fallback)</div>}
       </header>
 

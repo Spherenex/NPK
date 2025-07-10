@@ -1,18 +1,31 @@
-.recommendations-panel {
-  background-color: var(--background-paper);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  padding: 2rem;
-  position: relative;
-  overflow: hidden;
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  background: linear-gradient(145deg, #ffffff, #fdfbf5);
+/* Recommendations.css - ML-Powered Recommendations Design */
+
+:root {
+  --recommendations-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --ml-gradient: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  --action-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --insight-gradient: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  --optimal-gradient: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  --card-bg: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: 0 12px 35px rgba(0, 0, 0, 0.15);
+  --border-radius: 16px;
+  --border-radius-small: 8px;
+  --text-primary: #2d3748;
+  --text-secondary: #4a5568;
+  --text-light: #718096;
 }
 
-.recommendations-panel:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
+/* Main Panel */
+.recommendations-panel {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 32px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .recommendations-panel::before {
@@ -20,420 +33,435 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 6px;
-  background: linear-gradient(to right, var(--accent-color), var(--accent-light));
+  right: 0;
+  height: 4px;
+  background: var(--recommendations-gradient);
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 
+.recommendations-panel:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* Panel Header */
 .recommendations-panel h3 {
+  font-size: 24px;
+  font-weight: 700;
   color: var(--text-primary);
-  font-size: 1.3rem;
-  margin-bottom: 2rem;
-  position: relative;
-  padding-bottom: 0.8rem;
+  margin: 0 0 28px 0;
   display: flex;
   align-items: center;
-  gap: 0.8rem;
-  font-weight: 600;
-  letter-spacing: -0.5px;
+  gap: 12px;
+  position: relative;
 }
 
 .recommendations-icon {
-  font-size: 1.5rem;
+  font-size: 28px;
+  animation: glow 2s ease-in-out infinite alternate;
 }
 
+@keyframes glow {
+  from { 
+    filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.3));
+    transform: scale(1);
+  }
+  to { 
+    filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.6));
+    transform: scale(1.05);
+  }
+}
+
+/* ML Badge */
 .ml-badge {
-  background: linear-gradient(135deg, #6200ea, #3f51b5);
+  background: var(--ml-gradient);
   color: white;
-  padding: 0.3rem 0.8rem;
-  border-radius: var(--radius-full);
-  font-size: 0.75rem;
-  font-weight: 600;
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  box-shadow: 0 2px 8px rgba(98, 0, 234, 0.3);
-  animation: pulse 2s infinite;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 3px 12px rgba(251, 191, 36, 0.3);
+  position: relative;
+  overflow: hidden;
+  animation: pulse 2s ease-in-out infinite;
 }
 
 .ml-badge::before {
-  content: '🧠';
-  font-size: 1rem;
+  content: '🧠 ';
+  margin-right: 4px;
+}
+
+.ml-badge::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
 }
 
 @keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(98, 0, 234, 0.4); }
-  70% { box-shadow: 0 0 0 10px rgba(98, 0, 234, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(98, 0, 234, 0); }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
 }
 
-.recommendations-panel h3::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(to right, var(--accent-color), var(--accent-light));
-  border-radius: 1.5px;
-}
-
+/* Recommendations List */
 .recommendations-list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 20px;
 }
 
+/* Individual Recommendation Item */
 .recommendation-item {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: var(--radius-md);
-  padding: 1.5rem;
-  border-left: 4px solid;
-  transition: all var(--transition-normal);
-  box-shadow: var(--shadow-sm);
+  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+  border-radius: var(--border-radius-small);
+  padding: 24px;
+  border: 2px solid rgba(226, 232, 240, 0.8);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
   overflow: hidden;
-  cursor: pointer;
 }
 
-.recommendation-overlay {
+.recommendation-item::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 4px;
   height: 100%;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
-  pointer-events: none;
+  background: var(--action-gradient);
+  transition: width 0.3s ease;
+}
+
+.recommendation-item:hover::before {
+  width: 8px;
 }
 
 .recommendation-item:hover {
-  transform: translateX(8px) translateY(-3px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: rgba(16, 185, 129, 0.3);
 }
 
-.recommendation-item:nth-child(3n+1) {
-  border-left-color: var(--primary-color);
+.recommendation-item.expanded {
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
 }
 
-.recommendation-item:nth-child(3n+2) {
-  border-left-color: var(--secondary-color);
-}
-
-.recommendation-item:nth-child(3n+3) {
-  border-left-color: var(--accent-color);
-}
-
+/* Recommendation Header */
 .rec-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.2rem;
-  flex-wrap: wrap;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
 }
 
 .rec-parameter {
-  font-weight: 600;
-  font-size: 1.1rem;
-  color: var(--text-primary);
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  position: relative;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
 .rec-param-dot {
-  content: '';
-  display: block;
-  width: 16px;
-  height: 16px;
-  background-color: currentColor;
-  opacity: 0.1;
+  width: 12px;
+  height: 12px;
+  background: var(--action-gradient);
   border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
 }
 
-.recommendation-item:nth-child(3n+1) .rec-parameter {
-  color: var(--primary-dark);
-}
-
-.recommendation-item:nth-child(3n+2) .rec-parameter {
-  color: var(--secondary-dark);
-}
-
-.recommendation-item:nth-child(3n+3) .rec-parameter {
-  color: var(--accent-dark);
-}
-
+/* Values Section */
 .rec-values {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.current-value,
+.target-value,
+.confidence-value {
   display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.current-value, .target-value, .confidence-value {
-  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  padding: 0.4rem 0.8rem;
-  border-radius: var(--radius-full);
+  gap: 6px;
+  padding: 10px 14px;
+  border-radius: var(--border-radius-small);
+  font-size: 14px;
   font-weight: 600;
-  box-shadow: var(--shadow-sm);
-  transition: all var(--transition-fast);
-}
-
-.current-value:hover, .target-value:hover, .confidence-value:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.value-icon {
-  font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
 .current-value {
-  background-color: var(--secondary-ghost);
-  color: var(--secondary-dark);
-  border: 1px solid rgba(229, 57, 53, 0.2);
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  color: #991b1b;
+  border: 1px solid rgba(220, 38, 38, 0.2);
 }
 
 .target-value {
-  background-color: var(--primary-ghost);
-  color: var(--primary-dark);
-  border: 1px solid rgba(46, 125, 50, 0.2);
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  color: #065f46;
+  border: 1px solid rgba(5, 150, 105, 0.2);
 }
 
 .confidence-value {
-  background-color: rgba(98, 0, 234, 0.1);
-  color: #6200ea;
-  border: 1px solid rgba(98, 0, 234, 0.2);
+  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+  color: #3730a3;
+  border: 1px solid rgba(124, 58, 237, 0.2);
 }
 
+.value-icon {
+  font-size: 16px;
+}
+
+/* Action Section */
 .rec-action {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  position: relative;
-  padding-left: 1.8rem;
-  background-color: rgba(0, 0, 0, 0.02);
-  padding: 1rem 1rem 1rem 2.5rem;
-  border-radius: var(--radius-sm);
-  transition: all var(--transition-fast);
-}
-
-.rec-action:hover {
-  background-color: rgba(0, 0, 0, 0.03);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border-radius: var(--border-radius-small);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 16px;
 }
 
 .action-arrow {
-  position: absolute;
-  left: 1rem;
-  font-weight: bold;
-  font-size: 1.2rem;
+  color: #059669;
+  font-size: 18px;
+  font-weight: 700;
+  animation: slide 2s ease-in-out infinite;
 }
 
-.recommendation-item:nth-child(3n+1) .action-arrow {
-  color: var(--primary-color);
+@keyframes slide {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
 }
 
-.recommendation-item:nth-child(3n+2) .action-arrow {
-  color: var(--secondary-color);
-}
-
-.recommendation-item:nth-child(3n+3) .action-arrow {
-  color: var(--accent-color);
-}
-
+/* Expand Indicator */
 .rec-expand-indicator {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  font-size: 0.8rem;
-  color: var(--text-tertiary);
-  opacity: 0.6;
-  transition: all var(--transition-fast);
+  top: 24px;
+  right: 24px;
+  color: var(--text-light);
+  font-size: 14px;
+  font-weight: 700;
+  transition: all 0.3s ease;
 }
 
 .recommendation-item:hover .rec-expand-indicator {
-  opacity: 1;
+  color: var(--text-primary);
+  transform: scale(1.1);
 }
 
+/* Details Section */
 .rec-details {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px dashed rgba(0, 0, 0, 0.08);
-  animation: fadeIn 0.3s ease-out forwards;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid rgba(226, 232, 240, 0.5);
+  animation: slideDown 0.3s ease-out;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .rec-details h4 {
+  font-size: 16px;
+  font-weight: 700;
   color: var(--text-primary);
-  font-size: 1.05rem;
-  margin-bottom: 0.8rem;
-  font-weight: 600;
+  margin: 0 0 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rec-details h4::before {
+  content: '💭';
+  font-size: 18px;
 }
 
 .rec-details p {
   color: var(--text-secondary);
-  font-size: 0.95rem;
   line-height: 1.6;
+  margin: 0 0 16px 0;
 }
 
+/* ML Insight Section */
 .ml-insight {
-  margin-top: 1.2rem;
-  padding: 1.2rem;
-  background-color: rgba(98, 0, 234, 0.05);
-  border-radius: var(--radius-md);
-  border-left: 3px solid #6200ea;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  border-radius: var(--border-radius-small);
+  padding: 20px;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.ml-insight::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--insight-gradient);
 }
 
 .ml-insight h4 {
-  color: #6200ea;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  color: #5b21b6;
+  margin-bottom: 8px;
 }
 
 .ml-insight h4::before {
   content: '🧠';
-  font-size: 1.1rem;
 }
 
+.ml-insight p {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* No Recommendations State */
 .no-recommendations {
-  background-color: rgba(76, 175, 80, 0.1);
-  border-radius: var(--radius-md);
-  padding: 2rem 1.5rem;
   text-align: center;
-  color: var(--primary-dark);
-  font-weight: 500;
-  font-size: 1.05rem;
-  border: 1px dashed rgba(76, 175, 80, 0.3);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
+  padding: 48px 24px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border-radius: var(--border-radius-small);
+  border: 2px dashed rgba(34, 197, 94, 0.3);
 }
 
 .optimal-icon {
-  font-size: 2.5rem;
-  display: block;
-  background-color: rgba(76, 175, 80, 0.2);
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
+  font-size: 64px;
+  margin-bottom: 16px;
+  animation: bounce 2s ease-in-out infinite;
 }
 
-/* Add animation for recommendations */
-@keyframes slideInRight {
-  from { transform: translateX(50px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
 }
 
-.recommendation-item:nth-child(1) { animation: slideInRight 0.3s ease-out forwards; }
-.recommendation-item:nth-child(2) { animation: slideInRight 0.4s ease-out forwards; }
-.recommendation-item:nth-child(3) { animation: slideInRight 0.5s ease-out forwards; }
-.recommendation-item:nth-child(4) { animation: slideInRight 0.6s ease-out forwards; }
-.recommendation-item:nth-child(5) { animation: slideInRight 0.7s ease-out forwards; }
-
-/* ML Status Indicator in App Header */
-.ml-status {
-  font-size: 0.85rem;
-  padding: 0.3rem 0.8rem;
-  border-radius: var(--radius-full);
-  margin-top: 0.5rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+.no-recommendations p {
+  font-size: 18px;
   font-weight: 600;
+  color: #065f46;
+  margin: 0;
 }
 
-.ml-status::before {
-  content: '';
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-
-.ml-status.loading {
-  background-color: rgba(255, 152, 0, 0.1);
-  color: #f57c00;
-}
-
-.ml-status.loading::before {
-  background-color: #f57c00;
-  animation: blink 1s infinite;
-}
-
-.ml-status.ready {
-  background-color: rgba(76, 175, 80, 0.1);
-  color: #388e3c;
-}
-
-.ml-status.ready::before {
-  background-color: #388e3c;
-}
-
-.ml-status.error {
-  background-color: rgba(244, 67, 54, 0.1);
-  color: #d32f2f;
-}
-
-.ml-status.error::before {
-  background-color: #d32f2f;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-
+/* Responsive Design */
 @media (max-width: 768px) {
   .recommendations-panel {
-    padding: 1.5rem;
+    padding: 24px 20px;
   }
   
   .recommendations-panel h3 {
-    font-size: 1.2rem;
-  }
-  
-  .rec-header {
+    font-size: 20px;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.8rem;
-  }
-  
-  .rec-action {
-    font-size: 0.95rem;
-    padding: 0.8rem 0.8rem 0.8rem 2.2rem;
+    gap: 8px;
+    text-align: center;
   }
   
   .recommendation-item {
-    padding: 1.2rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .recommendations-panel {
-    padding: 1.2rem;
+    padding: 20px;
   }
   
   .rec-values {
-    width: 100%;
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
   
-  .current-value, .target-value, .confidence-value {
-    flex: 1;
-    justify-content: center;
+  .rec-header {
+    gap: 12px;
+  }
+  
+  .rec-parameter {
+    font-size: 16px;
+  }
+  
+  .rec-expand-indicator {
+    top: 20px;
+    right: 20px;
   }
 }
+
+@media (max-width: 480px) {
+  .recommendations-panel {
+    padding: 20px 16px;
+  }
+  
+  .recommendation-item {
+    padding: 16px;
+  }
+  
+  .rec-action {
+    padding: 12px 16px;
+  }
+  
+  .ml-insight {
+    padding: 16px;
+  }
+  
+  .no-recommendations {
+    padding: 32px 20px;
+  }
+  
+  .optimal-icon {
+    font-size: 48px;
+  }
+}
+
+/* Loading Animation */
+.recommendation-item.loading {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
+}
+
+/* Entrance Animations */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.recommendation-item {
+  animation: slideInLeft 0.5s ease-out both;
+}
+
+.recommendation-item:nth-child(1) { animation-delay: 0.1s; }
+.recommendation-item:nth-child(2) { animation-delay: 0.2s; }
+.recommendation-item:nth-child(3) { animation-delay: 0.3s; }
+.recommendation-item:nth-child(4) { animation-delay: 0.4s; }
+.recommendation-item:nth-child(5) { animation-delay: 0.5s; }
