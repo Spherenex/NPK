@@ -1,109 +1,245 @@
+// import React, { useState } from 'react';
+// import './AppLayout.css';
+// import { 
+//   MdChevronRight, 
+//   MdChevronLeft, 
+//   MdDashboard, 
+//   MdGrass, 
+//   MdSensors, 
+//   MdPsychology, 
+//   MdLogout,
+//   MdShowChart
+// } from 'react-icons/md';
+
+// // SphereNex Logo Component
+// const SphereNexLogo = ({ collapsed }) => {
+//   const logoStyle = {
+//     display: 'flex',
+//     alignItems: 'center',
+//     justifyContent: collapsed ? 'center' : 'flex-start',
+//     fontWeight: 'bold',
+//     fontSize: collapsed ? '0.8rem' : '1.2rem',
+//     whiteSpace: 'nowrap'
+//   };
+
+//   const sphereStyle = {
+//     color: '#0077FF', // Blue color
+//   };
+
+//   const nexStyle = {
+//     color: '#FF6600', // Orange color
+//   };
+
+//   // If collapsed, just show an "S" or small logo version
+//   if (collapsed) {
+//     return <span style={logoStyle}><span style={sphereStyle}>S</span><span style={nexStyle}>X</span></span>;
+//   }
+
+//   return (
+//     <div style={logoStyle}>
+//       <span style={sphereStyle}>SPHERE</span>
+//       <span style={nexStyle}>NEX</span>
+//     </div>
+//   );
+// };
+
+// const AppLayout = ({ children, onLogout, onNavigate, activeSection, currentUser }) => {
+//   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
+//   const toggleSidebar = () => {
+//     setSidebarCollapsed(!sidebarCollapsed);
+//   };
+
+//   // Array of sidebar menu items - added the new Visualizations item
+//   const menuItems = [
+//     { id: 'dashboard', icon: <MdDashboard />, text: 'Dashboard' },
+//     { id: 'crops', icon: <MdGrass />, text: 'Crop Management' },
+//     { id: 'sensor', icon: <MdSensors />, text: 'Sensor Data' },
+//     { id: 'ml', icon: <MdPsychology />, text: 'ML System' },
+//     { id: 'graphs', icon: <MdShowChart />, text: 'Visualizations' }
+//   ];
+
+//   return (
+//     <div className="app-container">
+//       {/* Sidebar */}
+//       <aside className={`sidebar ${sidebarCollapsed ? 'collapsed' : ''}`}>
+//         <div className="sidebar-header">
+//           <div className="app-logo">
+//             {/* Replace MdEco and NPK text with the SphereNex logo */}
+//             <SphereNexLogo collapsed={sidebarCollapsed} />
+//           </div>
+//           <button className="collapse-button" onClick={toggleSidebar} aria-label="Toggle sidebar">
+//             {sidebarCollapsed ? <MdChevronRight /> : <MdChevronLeft />}
+//           </button>
+//         </div>
+        
+//         <nav className="nav-menu">
+//           {menuItems.map(item => (
+//             <button 
+//               key={item.id}
+//               className={`nav-item ${activeSection === item.id ? 'active' : ''}`}
+//               onClick={() => onNavigate(item.id)}
+//             >
+//               <span className="nav-icon">{item.icon}</span>
+//               {!sidebarCollapsed && <span className="nav-text">{item.text}</span>}
+//             </button>
+//           ))}
+//         </nav>
+        
+//         <div className="sidebar-footer">
+//           <button className="nav-item logout-button" onClick={onLogout}>
+//             <span className="nav-icon"><MdLogout /></span>
+//             {!sidebarCollapsed && <span className="nav-text">Logout</span>}
+//           </button>
+//         </div>
+//       </aside>
+      
+//       {/* Main Content Area */}
+//       <div className="main-content-wrapper">
+//         {/* Header */}
+//         <header className="header">
+//           <h1 className="page-title">Crop Yield Prediction & Management</h1>
+          
+//           <div className="user-section">
+//             <div className="user-profile">
+//               <div className="avatar">{currentUser?.displayName?.[0] || 'A'}</div>
+//               <span className="username">{currentUser?.displayName || 'Admin'}</span>
+//             </div>
+//           </div>
+//         </header>
+        
+//         {/* Page Content */}
+//         <main className="content-area">
+//           {children}
+//         </main>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default AppLayout;
+
+
+
 import React, { useState } from 'react';
 import './AppLayout.css';
 import { 
-  MdEco, 
   MdChevronRight, 
   MdChevronLeft, 
   MdDashboard, 
   MdGrass, 
   MdSensors, 
   MdPsychology, 
-  MdCalendarMonth, 
-  MdSettings, 
-  MdLogout, 
-  MdCheckCircle, 
-  MdHourglassEmpty, 
-  MdWarning 
+  MdLogout,
+  MdShowChart,
+  MdChat  // Added icon for chatbot
 } from 'react-icons/md';
 
-const AppLayout = ({ children, onLogout, mlModelStatus }) => {
+// SphereNex Logo Component
+const SphereNexLogo = ({ collapsed }) => {
+  const logoStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: collapsed ? 'center' : 'flex-start',
+    fontWeight: 'bold',
+    fontSize: collapsed ? '0.8rem' : '1.2rem',
+    whiteSpace: 'nowrap'
+  };
+
+  const sphereStyle = {
+    color: '#0077FF', // Blue color
+  };
+
+  const nexStyle = {
+    color: '#FF6600', // Orange color
+  };
+
+  // If collapsed, just show an "S" or small logo version
+  if (collapsed) {
+    return <span style={logoStyle}><span style={sphereStyle}>S</span><span style={nexStyle}>X</span></span>;
+  }
+
+  return (
+    <div style={logoStyle}>
+      <span style={sphereStyle}>SPHERE</span>
+      <span style={nexStyle}>NEX</span>
+    </div>
+  );
+};
+
+const AppLayout = ({ children, onLogout, onNavigate, activeSection, currentUser }) => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [activeMenu, setActiveMenu] = useState('dashboard');
 
   const toggleSidebar = () => {
     setSidebarCollapsed(!sidebarCollapsed);
   };
 
+  // Array of sidebar menu items - added the new AI Chatbot item
+  const menuItems = [
+    { id: 'dashboard', icon: <MdDashboard />, text: 'Dashboard' },
+    { id: 'crops', icon: <MdGrass />, text: 'Crop Management' },
+    { id: 'sensor', icon: <MdSensors />, text: 'Sensor Data' },
+    { id: 'ml', icon: <MdPsychology />, text: 'ML System' },
+    { id: 'graphs', icon: <MdShowChart />, text: 'Visualizations' },
+    // { id: 'chatbot', icon: <MdChat />, text: 'Agriculture AI Chatbot' } // New menu item
+  ];
+
   return (
-    <div className="app-layout">
+    <div className="app-container">
       {/* Sidebar */}
-      <div className={`sidebar ${sidebarCollapsed ? 'collapsed' : ''}`}>
+      <aside className={`sidebar ${sidebarCollapsed ? 'collapsed' : ''}`}>
         <div className="sidebar-header">
-          <div className="sidebar-logo">
-            <span className="sidebar-logo-icon"><MdEco /></span>
-            {!sidebarCollapsed && <span className="sidebar-logo-text">NPK</span>}
+          <div className="app-logo">
+            {/* Replace MdEco and NPK text with the SphereNex logo */}
+            <SphereNexLogo collapsed={sidebarCollapsed} />
           </div>
-          <button className="sidebar-toggle" onClick={toggleSidebar}>
+          <button className="collapse-button" onClick={toggleSidebar} aria-label="Toggle sidebar">
             {sidebarCollapsed ? <MdChevronRight /> : <MdChevronLeft />}
           </button>
         </div>
         
-        <div className="sidebar-menu">
-          <div 
-            className={`sidebar-item ${activeMenu === 'dashboard' ? 'active' : ''}`}
-            onClick={() => setActiveMenu('dashboard')}
-          >
-            <span className="sidebar-item-icon"><MdDashboard /></span>
-            {!sidebarCollapsed && <span className="sidebar-item-text">Dashboard</span>}
-          </div>
-          
-          <div 
-            className={`sidebar-item ${activeMenu === 'crops' ? 'active' : ''}`}
-            onClick={() => setActiveMenu('crops')}
-          >
-            <span className="sidebar-item-icon"><MdGrass /></span>
-            {!sidebarCollapsed && <span className="sidebar-item-text">Crop Management</span>}
-          </div>
-          
-          <div 
-            className={`sidebar-item ${activeMenu === 'sensor' ? 'active' : ''}`}
-            onClick={() => setActiveMenu('sensor')}
-          >
-            <span className="sidebar-item-icon"><MdSensors /></span>
-            {!sidebarCollapsed && <span className="sidebar-item-text">Sensor Data</span>}
-          </div>
-          
-          <div 
-            className={`sidebar-item ${activeMenu === 'ml' ? 'active' : ''}`}
-            onClick={() => setActiveMenu('ml')}
-          >
-            <span className="sidebar-item-icon"><MdPsychology /></span>
-            {!sidebarCollapsed && <span className="sidebar-item-text">ML System</span>}
-          </div>
-        </div>
+        <nav className="nav-menu">
+          {menuItems.map(item => (
+            <button 
+              key={item.id}
+              className={`nav-item ${activeSection === item.id ? 'active' : ''}`}
+              onClick={() => onNavigate(item.id)}
+            >
+              <span className="nav-icon">{item.icon}</span>
+              {!sidebarCollapsed && <span className="nav-text">{item.text}</span>}
+            </button>
+          ))}
+        </nav>
         
         <div className="sidebar-footer">
-          <div className="sidebar-item" onClick={onLogout}>
-            <span className="sidebar-item-icon"><MdLogout /></span>
-            {!sidebarCollapsed && <span className="sidebar-item-text">Logout</span>}
-          </div>
+          <button className="nav-item logout-button" onClick={onLogout}>
+            <span className="nav-icon"><MdLogout /></span>
+            {!sidebarCollapsed && <span className="nav-text">Logout</span>}
+          </button>
         </div>
-      </div>
+      </aside>
       
       {/* Main Content Area */}
-      <div className={`main-area ${sidebarCollapsed ? 'expanded' : ''}`}>
+      <div className="main-content-wrapper">
         {/* Header */}
-        <div className="main-header">
-          <h1>Crop Yield Prediction & Management</h1>
+        <header className="header">
+          <h1 className="page-title">Crop Yield Prediction & Management</h1>
           
-          <div className="header-right">
-            
-            
+          <div className="user-section">
             <div className="user-profile">
-              <div className="user-avatar">A</div>
-              <span className="user-name">Admin</span>
+              <div className="avatar">{currentUser?.displayName?.[0] || 'A'}</div>
+              <span className="username">{currentUser?.displayName || 'Admin'}</span>
             </div>
           </div>
-        </div>
+        </header>
         
         {/* Page Content */}
-        <div className="main-content">
+        <main className="content-area">
           {children}
-        </div>
+        </main>
       </div>
     </div>
   );
 };
 
 export default AppLayout;
-

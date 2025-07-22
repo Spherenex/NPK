@@ -1,4 +1,4 @@
-/* App.css - Modern Gradient Application Design */
+/* App.css - Professional Application Design */
 
 :root {
   --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -7,8 +7,7 @@
   --warm-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
   --cool-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
   --hero-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  --card-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+  --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   --border-radius: 12px;
   --border-radius-large: 16px;
   --border-radius-small: 8px;
@@ -17,7 +16,6 @@
   --text-light: #718096;
   --white: #ffffff;
   --bg-light: #f7fafc;
-  --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
 }
 
 * {
@@ -35,91 +33,30 @@ body {
 
 .app-container {
   min-height: 100vh;
-  background: var(--bg-gradient);
-  background-attachment: fixed;
+  background: #ffffff;
 }
 
 /* Header Styles */
 header {
-  background: linear-gradient(135deg, #4ade80 0%, #22c55e 50%, #16a34a 100%);
+  background: #22c55e;
   color: var(--white);
   padding: 32px 0;
   text-align: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-}
-
-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  animation: headerShimmer 3s infinite;
-}
-
-/* Tomato decorations */
-header::after {
-
-  position: absolute;
-  font-size: 48px;
-  /* top: 45px; */
-  right: 50px;
-  animation: float 3s ease-in-out infinite;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
-}
-
-header .tomato-left {
-  position: absolute;
-  font-size: 42px;
-  top: 25px;
-  left: 60px;
-  animation: float 3s ease-in-out infinite reverse;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
-}
-
-header .tomato-small {
-  position: absolute;
-  font-size: 28px;
-  top: 70px;
-  right: 120px;
-  animation: float 2s ease-in-out infinite;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-}
-
-@keyframes headerShimmer {
-  0% { left: -100%; }
-  100% { left: 100%; }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 header h1 {
   font-size: 36px;
   font-weight: 800;
   margin-bottom: 16px;
-  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
   letter-spacing: -0.5px;
   position: relative;
   z-index: 2;
 }
 
-/* Add this to your HTML header structure:
-<header>
-  <div class="tomato-left">🍅</div>
-  <h1>Tomato Crop Yield Prediction & Management</h1>
-  <div class="tomato-small">🍅</div>
-  {mlModelStatus && <div className="ml-status {mlModelStatus}">...</div>}
-</header>
-*/
-
-/* Enhanced ML Status with tomato theme */
+/* ML Status */
 .ml-status {
   display: inline-block;
   padding: 10px 20px;
@@ -131,49 +68,28 @@ header h1 {
   position: relative;
   overflow: hidden;
   margin-top: 8px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid #ffffff;
 }
 
-
 .ml-status.loading {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-  animation: pulse 2s infinite;
-  box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+  background: #f59e0b;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .ml-status.ready {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
-  animation: glow 3s ease-in-out infinite alternate;
+  background: #10b981;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .ml-status.error {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  animation: shake 0.5s ease-in-out;
-  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
-}
-
-@keyframes glow {
-  from { box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); }
-  to { box-shadow: 0 4px 20px rgba(16, 185, 129, 0.6), 0 0 30px rgba(16, 185, 129, 0.3); }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
+  background: #dc2626;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Dashboard Container */
 .dashboard-container {
-  max-width: 1400px;
   margin: 0 auto;
-  padding: 32px 24px;
+  /* padding: 32px 24px; */
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -198,65 +114,21 @@ header h1 {
 
 /* Welcome Panel */
 .welcome-panel {
-  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  background: #ffffff;
   padding: 60px 48px;
-  border-radius: 24px;
-  box-shadow: 
-    0 15px 35px rgba(0, 0, 0, 0.1),
-    0 5px 15px rgba(0, 0, 0, 0.08);
+  /* border-radius: 24px; */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   text-align: center;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-}
-
-.welcome-panel::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 6px;
-  background: linear-gradient(135deg, #4ade80 0%, #22c55e 50%, #16a34a 100%);
-  border-radius: 24px 24px 0 0;
-}
-
-/* Add farmer illustration area */
-.welcome-panel::after {
-  content: '👨‍🌾';
-  position: absolute;
-  font-size: 80px;
-  top: 20px;
-  right: 40px;
-  opacity: 0.1;
-  animation: float 4s ease-in-out infinite;
+  border: 1px solid #e2e8f0;
 }
 
 .welcome-panel h2 {
   font-size: 32px;
   font-weight: 800;
-  color: var(--text-primary);
+  /* color: #22c55e; */
   margin-bottom: 20px;
-  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  position: relative;
-}
-
-.welcome-panel h2::after {
-  content: '🍅🍅🍅';
-  position: absolute;
-  top: -10px;
-  right: -40px;
-  font-size: 24px;
-  animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-10px); }
-  60% { transform: translateY(-5px); }
 }
 
 .welcome-panel p {
@@ -279,127 +151,49 @@ header h1 {
 }
 
 .feature {
-  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  background: #ffffff;
   padding: 40px 28px;
-  border-radius: 20px;
-  box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.1),
-    0 1px 8px rgba(0, 0, 0, 0.06);
+  /* border-radius: 20px; */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   text-align: center;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 1px solid #e2e8f0;
 }
 
-.feature::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 5px;
-  border-radius: 20px 20px 0 0;
-  transition: all 0.3s ease;
-}
-
-.feature:hover::before {
-  height: 8px;
-}
-
-.feature:hover {
-  transform: translateY(-12px) scale(1.02);
-  box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.15),
-    0 8px 16px rgba(0, 0, 0, 0.1);
-}
-
-.feature:nth-child(1)::before {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.feature:nth-child(2)::before {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-}
-
-.feature:nth-child(3)::before {
-  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-}
-
-.feature:nth-child(1):hover {
-  box-shadow: 
-    0 20px 40px rgba(102, 126, 234, 0.2),
-    0 8px 16px rgba(102, 126, 234, 0.1);
-}
-
-.feature:nth-child(2):hover {
-  box-shadow: 
-    0 20px 40px rgba(79, 172, 254, 0.2),
-    0 8px 16px rgba(79, 172, 254, 0.1);
-}
-
-.feature:nth-child(3):hover {
-  box-shadow: 
-    0 20px 40px rgba(250, 112, 154, 0.2),
-    0 8px 16px rgba(250, 112, 154, 0.1);
-}
-
+/* React Icon Styling */
 .feature-icon {
-  font-size: 56px;
   margin-bottom: 20px;
-  height: 100px;
-  width: 100px;
+  height: 80px;
+  width: 80px;
   margin-left: auto;
   margin-right: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  position: relative;
-  transition: all 0.4s ease;
-  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+  background: #f5f5f5;
+  border: 1px solid #e2e8f0;
 }
 
-.feature:nth-child(1) .feature-icon {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+.feature-icon svg {
+  width: 40px;
+  height: 40px;
+  color: #4a5568;
 }
 
-.feature:nth-child(2) .feature-icon {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+/* Individual feature icon colors */
+/* .feature:nth-child(1) .feature-icon svg {
+  color: #667eea;
 }
 
-.feature:nth-child(3) .feature-icon {
-  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+.feature:nth-child(2) .feature-icon svg {
+  color: #4facfe;
 }
 
-.feature:hover .feature-icon {
-  transform: rotate(10deg) scale(1.1);
-  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.2));
-}
-
-/* Replace emoji with better visuals */
-.feature:nth-child(1) .feature-icon::after {
-  content: "📊";
-  color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.feature:nth-child(2) .feature-icon::after {
-  content: "🔄";
-  color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.feature:nth-child(3) .feature-icon::after {
-  content: "🍅";
-  font-size: 48px;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-}
+.feature:nth-child(3) .feature-icon svg {
+  color: #fa709a;
+} */
 
 .feature h3 {
   font-size: 20px;
@@ -422,43 +216,13 @@ header h1 {
 
 /* Individual Component Styling */
 .main-content > div {
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  border-radius: var(--border-radius);
-  box-shadow: var(--card-shadow);
+  background: #ffffff;
   padding: 24px;
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
   position: relative;
   overflow: hidden;
   min-height: 200px;
-}
-
-.main-content > div::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--primary-gradient);
-  border-radius: var(--border-radius) var(--border-radius) 0 0;
-}
-
-.main-content > div:nth-child(2n)::before {
-  background: var(--success-gradient);
-}
-
-.main-content > div:nth-child(3n)::before {
-  background: var(--warm-gradient);
-}
-
-.main-content > div:nth-child(4n)::before {
-  background: var(--secondary-gradient);
-}
-
-.main-content > div:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--card-shadow-hover);
+  width: 100%;
 }
 
 /* Responsive Design */
@@ -466,38 +230,12 @@ header h1 {
   .main-content {
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   }
-  
-  header::after {
-    font-size: 36px;
-    right: 30px;
-  }
-  
-  .tomato-left {
-    font-size: 32px;
-    left: 30px;
-  }
 }
 
 @media (max-width: 768px) {
   header h1 {
     font-size: 28px;
     padding: 0 20px;
-  }
-  
-  header::after {
-    font-size: 28px;
-    right: 20px;
-    top: 15px;
-  }
-  
-  .tomato-left {
-    font-size: 24px;
-    left: 20px;
-    top: 20px;
-  }
-  
-  .tomato-small {
-    display: none;
   }
   
   .dashboard-container {
@@ -562,18 +300,6 @@ header h1 {
     padding: 0 60px;
   }
   
-  header::after {
-    font-size: 24px;
-    right: 15px;
-    top: 12px;
-  }
-  
-  .tomato-left {
-    font-size: 20px;
-    left: 15px;
-    top: 15px;
-  }
-  
   .welcome-panel {
     padding: 32px 20px;
   }
@@ -602,43 +328,6 @@ header h1 {
   }
 }
 
-/* Animation for smooth page transitions */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.app-container {
-  animation: fadeInUp 0.8s ease-out;
-}
-
-.welcome-panel {
-  animation: fadeInUp 0.6s ease-out 0.2s both;
-}
-
-.feature {
-  animation: fadeInUp 0.6s ease-out both;
-}
-
-.feature:nth-child(1) { animation-delay: 0.3s; }
-.feature:nth-child(2) { animation-delay: 0.4s; }
-.feature:nth-child(3) { animation-delay: 0.5s; }
-
-.main-content > div {
-  animation: fadeInUp 0.6s ease-out both;
-}
-
-.main-content > div:nth-child(1) { animation-delay: 0.2s; }
-.main-content > div:nth-child(2) { animation-delay: 0.3s; }
-.main-content > div:nth-child(3) { animation-delay: 0.4s; }
-.main-content > div:nth-child(4) { animation-delay: 0.5s; }
-
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 8px;
@@ -650,12 +339,8 @@ header h1 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary-gradient);
+  background: #667eea;
   border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--secondary-gradient);
 }
 
 /* Loading and Success States */
@@ -669,7 +354,7 @@ header h1 {
 
 .success-state {
   padding: 20px;
-  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  background: #d1fae5;
   border-radius: var(--border-radius);
   color: #065f46;
   text-align: center;
@@ -679,7 +364,7 @@ header h1 {
 /* Error States */
 .error-state {
   padding: 20px;
-  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  background: #fee2e2;
   border-radius: var(--border-radius);
   color: #991b1b;
   text-align: center;

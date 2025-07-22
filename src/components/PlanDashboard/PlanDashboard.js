@@ -231,7 +231,7 @@ const PlanDashboard = ({
                 </div>
             )}
 
-            <div className="download-section">
+            {/* <div className="download-section">
                 <p>Need offline access to your plan? Download it in your preferred format:</p>
                 <div className="download-buttons">
                     <button className="download-btn pdf-btn">
@@ -244,7 +244,7 @@ const PlanDashboard = ({
                         Print Plan
                     </button>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };

@@ -1,6 +1,14 @@
 import React from 'react';
 import { getIdealRanges } from '../../utils/cropUtils';
-import './IdealRanges.css'
+import './IdealRanges.css';
+import { 
+    MdOutlineWaterDrop, 
+    MdOutlineWbSunny, 
+    MdScience, 
+    MdBolt, 
+    MdGrass, 
+    MdSettings
+} from 'react-icons/md';
 
 /**
  * Component to display ideal parameter ranges for a specific growth stage and land type
@@ -29,14 +37,37 @@ const IdealRanges = ({ currentDayPlan, selectedLandType }) => {
         }
     };
 
+    // Function to get icon for parameter
+    const getParameterIcon = (param) => {
+        switch (param) {
+            case "soilTemp": return <MdOutlineWbSunny className="param-icon" />;
+            case "soilMoisture": return <MdOutlineWaterDrop className="param-icon" />;
+            case "pH": return <MdScience className="param-icon" />;
+            case "ec": return <MdBolt className="param-icon" />;
+            case "nitrogen": 
+            case "phosphorus": 
+            case "potassium": return <MdGrass className="param-icon" />;
+            default: return <MdSettings className="param-icon" />;
+        }
+    };
+
     return (
-        <div className="ideal-ranges-panel">
-            <h3>Ideal Ranges for {currentDayPlan.growthStage} Stage in {selectedLandType}</h3>
-            <div className="ideal-ranges-grid">
+        <div className="parameters-panel">
+            <div className="panel-header">
+                <h3>Ideal Parameter Ranges</h3>
+                <div className="panel-subtitle">
+                    For {currentDayPlan.growthStage} Stage in {selectedLandType}
+                </div>
+            </div>
+            
+            <div className="parameters-grid">
                 {Object.entries(idealRanges).map(([param, range]) => (
-                    <div className="ideal-range-item" key={param}>
-                        <span className="range-param">{formatParameterName(param)}</span>
-                        <span className="range-value">{range}</span>
+                    <div className="parameter-card" key={param}>
+                        <div className="parameter-header">
+                            {getParameterIcon(param)}
+                            <span className="parameter-name">{formatParameterName(param)}</span>
+                        </div>
+                        <div className="parameter-value">{range}</div>
                     </div>
                 ))}
             </div>

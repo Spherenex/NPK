@@ -1,36 +1,19 @@
-// import './Recommendations.css'
-
-// const Recommendations = ({ recommendations }) => {
-//     return (
-//         <div className="recommendations-panel">
-//             <h3>Action Recommendations</h3>
-//             {recommendations.length > 0 ? (
-//                 <div className="recommendations-list">
-//                     {recommendations.map((rec, index) => (
-//                         <div className="recommendation-item" key={index}>
-//                             <div className="rec-header">
-//                                 <span className="rec-parameter">{rec.parameter}</span>
-//                                 <div className="rec-values">
-//                                     <span className="current-value">Current: {rec.current}</span>
-//                                     <span className="target-value">Target: {rec.target}</span>
-//                                 </div>
-//                             </div>
-//                             <div className="rec-action">{rec.action}</div>
-//                         </div>
-//                     ))}
-//                 </div>
-//             ) : (
-//                 <p className="no-recommendations">All parameters are within optimal ranges. No adjustments needed at this time.</p>
-//             )}
-//         </div>
-//     );
-// };
-
-// export default Recommendations;
-
-
 import React, { useState } from 'react';
 import './Recommendations.css';
+import { 
+    MdLightbulb, 
+    MdPsychology, 
+    MdArrowForward, 
+    MdBarChart, 
+    MdTarget, 
+    MdPercent,
+    MdExpandMore,
+    MdExpandLess,
+    MdCheckCircle,
+    MdInfo,
+    MdTipsAndUpdates,
+    MdOutlinePriorityHigh
+} from 'react-icons/md';
 
 /**
  * Enhanced Recommendations component to display ML-powered recommendations
@@ -50,9 +33,13 @@ const Recommendations = ({ recommendations, mlActive = false }) => {
     return (
         <div className="recommendations-panel">
             <h3>
-                <span className="recommendations-icon">💡</span>
+                <MdLightbulb className="recommendations-icon" />
                 Action Recommendations
-                {mlActive && <span className="ml-badge">ML-Powered</span>}
+                {mlActive && (
+                    <span className="ml-badge">
+                        <MdPsychology className="ml-badge-icon" /> ML-Powered
+                    </span>
+                )}
             </h3>
             
             {recommendations.length > 0 ? (
@@ -72,18 +59,18 @@ const Recommendations = ({ recommendations, mlActive = false }) => {
                                 
                                 <div className="rec-values">
                                     <span className="current-value">
-                                        <span className="value-icon">📊</span>
+                                        <MdBarChart className="value-icon" />
                                         Current: {rec.current}
                                     </span>
                                     <span className="target-value">
-                                        <span className="value-icon">🎯</span>
+                                        {/* <MdTarget className="value-icon" /> */}
                                         Target: {rec.target}
                                     </span>
                                     
                                     {/* Display confidence if available (from ML model) */}
                                     {rec.confidence && mlActive && (
                                         <span className="confidence-value">
-                                            <span className="value-icon">🧠</span>
+                                            <MdPercent className="value-icon" />
                                             Confidence: {rec.confidence}
                                         </span>
                                     )}
@@ -91,14 +78,16 @@ const Recommendations = ({ recommendations, mlActive = false }) => {
                             </div>
                             
                             <div className="rec-action">
-                                <span className="action-arrow">→</span>
+                                <MdArrowForward className="action-arrow" />
                                 {rec.action}
                             </div>
                             
                             {/* Expanded details section */}
                             {expandedRec === index && (
                                 <div className="rec-details">
-                                    <h4>Why This Matters</h4>
+                                    <h4>
+                                        <MdInfo className="details-icon" /> Why This Matters
+                                    </h4>
                                     <p>
                                         {rec.parameter === "Soil Temperature" && 
                                             "Soil temperature affects seed germination, root development, nutrient uptake, and microbial activity. Maintaining optimal temperature ensures proper physiological processes."}
@@ -118,7 +107,9 @@ const Recommendations = ({ recommendations, mlActive = false }) => {
                                     
                                     {mlActive && (
                                         <div className="ml-insight">
-                                            <h4>ML Insight</h4>
+                                            <h4>
+                                                <MdPsychology className="insight-icon" /> ML Insight
+                                            </h4>
                                             <p>
                                                 Based on historical data from similar growing conditions, this adjustment 
                                                 has a high likelihood of improving your crop performance. The recommendation 
@@ -130,14 +121,14 @@ const Recommendations = ({ recommendations, mlActive = false }) => {
                             )}
                             
                             <div className="rec-expand-indicator">
-                                {expandedRec === index ? '▲' : '▼'}
+                                {expandedRec === index ? <MdExpandLess /> : <MdExpandMore />}
                             </div>
                         </div>
                     ))}
                 </div>
             ) : (
                 <div className="no-recommendations">
-                    <div className="optimal-icon">✅</div>
+                    <MdCheckCircle className="optimal-icon" />
                     <p>All parameters are within optimal ranges. No adjustments needed at this time.</p>
                 </div>
             )}

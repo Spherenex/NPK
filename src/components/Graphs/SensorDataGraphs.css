@@ -1,0 +1,323 @@
+/* SensorDataGraphs.css - Professional styling for data visualizations */
+
+.sensor-graphs-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Graph panel styling */
+.graph-panel {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+/* Graph header section */
+.graph-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  background-color: #fafafa;
+}
+
+.graph-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333333;
+  margin: 0;
+}
+
+/* Controls for parameter selection and time range */
+.graph-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.parameter-selector, .time-range-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.parameter-selector label, .time-range-selector label {
+  font-size: 13px;
+  color: #666666;
+  white-space: nowrap;
+}
+
+.parameter-selector select {
+  padding: 6px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  background-color: #ffffff;
+  font-size: 13px;
+  color: #333333;
+  cursor: pointer;
+  outline: none;
+}
+
+.parameter-selector select:focus {
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+}
+
+/* Time range buttons */
+.time-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.time-buttons button {
+  padding: 6px 10px;
+  border: 1px solid #e0e0e0;
+  background-color: #ffffff;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #666666;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.time-buttons button:hover {
+  background-color: #f5f5f5;
+}
+
+.time-buttons button.active {
+  background-color: #2196f3;
+  color: #ffffff;
+  border-color: #2196f3;
+}
+
+/* Graph body section */
+.graph-body {
+  padding: 20px;
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* No data message */
+.no-data-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #9e9e9e;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.no-data-message p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Custom tooltip styling */
+.custom-tooltip {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 10px 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-size: 12px;
+}
+
+.custom-tooltip .label {
+  margin: 0 0 5px;
+  font-weight: 600;
+  color: #666666;
+}
+
+.custom-tooltip .value {
+  margin: 0;
+  font-weight: 600;
+}
+
+.custom-tooltip .label-info {
+  margin: 5px 0 0;
+  font-size: 11px;
+  color: #9e9e9e;
+}
+
+/* Prediction panel specific styling */
+.prediction-info {
+  display: flex;
+  align-items: center;
+}
+
+.info-tag {
+  font-size: 12px;
+  color: #757575;
+  background-color: #f5f5f5;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.prediction-details {
+  padding: 0 20px 16px;
+}
+
+.prediction-description {
+  font-size: 13px;
+  color: #757575;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (min-width: 1024px) {
+  .sensor-graphs-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .graph-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .graph-controls {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+  
+  .parameter-selector, .time-range-selector {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .parameter-selector select {
+    flex-grow: 1;
+  }
+  
+  .time-buttons {
+    flex-grow: 1;
+    justify-content: flex-end;
+  }
+  
+  .graph-body {
+    height: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .graph-panel {
+    border-radius: 4px;
+  }
+  
+  .graph-header, .graph-body {
+    padding: 12px;
+  }
+  
+  .time-buttons button {
+    padding: 4px 8px;
+  }
+}
+/* Additional styles for AllParametersGraph component */
+
+.all-parameters-graph-container {
+  margin-top: 20px;
+}
+
+.graph-body.multi-parameter {
+  height: 450px;
+  flex-direction: column;
+  padding-top: 10px;
+}
+
+/* Parameter toggle switches */
+.parameter-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.parameter-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 12px;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #f9f9f9;
+}
+
+.parameter-toggle.active {
+  background-color: #fff;
+  font-weight: 500;
+  color: #333;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.parameter-toggle:hover {
+  border-color: #bbb;
+  background-color: #f5f5f5;
+}
+
+.parameter-toggle .color-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.parameter-toggle .param-name {
+  white-space: nowrap;
+}
+
+/* Responsive styles for the parameter toggles */
+@media (max-width: 768px) {
+  .parameter-toggles {
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .parameter-toggle {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+}
+
+/* Make the multi-parameter graph more responsive */
+@media (max-width: 600px) {
+  .graph-body.multi-parameter {
+    height: 400px;
+    padding: 10px 5px;
+  }
+  
+  .parameter-toggles {
+    gap: 5px;
+  }
+}
+
+/* Animation for newly added data points */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.recharts-line-curve {
+  animation: fadeIn 0.5s ease-in;
+}
